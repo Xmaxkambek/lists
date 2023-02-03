@@ -1,9 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lists/pages/home_page.dart';
 import 'package:lists/screens/home_page.dart';
 
 void main() {
-  runApp(MaterialApp(
-    home: HomePage(),
+  runApp(const MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: Welcome(),
   ));
 }

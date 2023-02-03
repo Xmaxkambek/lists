@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lists/models/models.dart';
 import 'package:lists/screens/new_task.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,274 +10,167 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Widget> _listitem = [
-    //#Icon1
-    Container(
-      height: 160,
-      width: 170,
-      color: Colors.white,
-      child: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(6.0),
-            child: Icon(
-              Icons.document_scanner_rounded,
-              size: 40,
-              color: Colors.blue,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10, top: 80),
-            child: Text(
-              "All",
-              style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10, top: 110),
-            child: Text(
-              "23 Tasks",
-              style: TextStyle(fontSize: 18, color: Colors.grey),
-            ),
-          ),
-        ],
-      ),
-    ),
-    //#Icon2
-    Container(
-      height: 160,
-      width: 170,
-      color: Colors.white,
-      child: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(6.0),
-            child: Icon(
-              Icons.work,
-              size: 40,
-              color: Colors.yellow,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10, top: 80),
-            child: Text(
-              "Work",
-              style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10, top: 110),
-            child: Text(
-              "14 Tasks",
-              style: TextStyle(fontSize: 18, color: Colors.grey),
-            ),
-          ),
-        ],
-      ),
-    ),
-    //#Icon3
-    Container(
-      height: 160,
-      width: 170,
-      color: Colors.white,
-      child: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(6.0),
-            child: Icon(
-              Icons.music_note_sharp,
-              size: 40,
-              color: Colors.red,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10, top: 80),
-            child: Text(
-              "Music",
-              style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10, top: 110),
-            child: Text(
-              "6 Tasks",
-              style: TextStyle(fontSize: 18, color: Colors.grey),
-            ),
-          ),
-        ],
-      ),
-    ),
-    //#Icon4
-    Container(
-      height: 160,
-      width: 170,
-      color: Colors.white,
-      child: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(6.0),
-            child: Icon(
-              Icons.travel_explore,
-              size: 40,
-              color: Colors.green,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10, top: 80),
-            child: Text(
-              "Travel",
-              style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10, top: 110),
-            child: Text(
-              "1 Tasks",
-              style: TextStyle(fontSize: 18, color: Colors.grey),
-            ),
-          ),
-        ],
-      ),
-    ),
-    //#Icon5
-    Container(
-      height: 160,
-      width: 170,
-      color: Colors.white,
-      child: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(6.0),
-            child: Icon(
-              Icons.person,
-              size: 40,
-              color: Colors.purple,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10, top: 80),
-            child: Text(
-              "Study",
-              style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10, top: 110),
-            child: Text(
-              "2 Tasks",
-              style: TextStyle(fontSize: 18, color: Colors.grey),
-            ),
-          ),
-        ],
-      ),
-    ),
-    //#Icon6
-    Container(
-      height: 160,
-      width: 170,
-      color: Colors.white,
-      child: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(6.0),
-            child: Icon(
-              Icons.home,
-              size: 40,
-              color: Colors.red,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10, top: 80),
-            child: Text(
-              "Home",
-              style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10, top: 110),
-            child: Text(
-              "14 Tasks",
-              style: TextStyle(fontSize: 18, color: Colors.grey),
-            ),
-          ),
-        ],
-      ),
-    ),
+  List<Jami> _item = [
+    Jami(
+        icon: Icon(
+          Icons.person,
+          color: Colors.blueAccent,
+        ),
+        title: 'salom',
+        subtitle: 'subtitle',
+        onPressed: () {}),
+    Jami(
+        icon: Icon(
+          Icons.work,
+          color: Colors.orange,
+        ),
+        title: 'Work',
+        subtitle: '14 Tasks',
+        onPressed: () {}),
+    Jami(
+        icon: Icon(
+          Icons.music_note,
+          color: Colors.red,
+        ),
+        title: 'Music',
+        subtitle: '6 Tasks',
+        onPressed: () {}),
+    Jami(
+        icon: Icon(
+          Icons.travel_explore,
+          color: Colors.green,
+        ),
+        title: 'Traval',
+        subtitle: '1 Tasks',
+        onPressed: () {}),
+    Jami(
+        icon: Icon(
+          Icons.menu_book_sharp,
+          color: Colors.purple,
+        ),
+        title: 'Study',
+        subtitle: '2 Tasks',
+        onPressed: () {}),
+    Jami(
+        icon: Icon(
+          Icons.home,
+          color: Colors.red,
+        ),
+        title: 'Home',
+        subtitle: '14 Tasks',
+        onPressed: () {}),
   ];
   @override
   Widget build(BuildContext context) {
+    final deviceSize = MediaQuery.of(context).size;
+
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Icon(Icons.menu),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 30, right: 13, left: 13),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // const SizedBox(height: 15),
+              GestureDetector(
+                onTap: () {},
+                child: const Icon(
+                  Icons.menu,
+                  size: 35,
+                ),
+              ),
+              const SizedBox(height: 15),
+              const Text(
+                'Lists',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 28),
+
+              Expanded(
+                child: GridView.builder(
+                  itemCount: _item.length,
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 200,
+                    // mainAxisExtent: 86,
+                    mainAxisSpacing: 15,
+                    crossAxisSpacing: 15,
+                    childAspectRatio: 19 / 20,
+                  ),
+                  itemBuilder: (context, index) => InkWell(
+                    onTap: () => _item[index].onPressed(context),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            //rgba(0, 0, 0, 0.1);
+                            color: Color.fromRGBO(0, 0, 0, 0.1),
+                            offset: Offset(0.5, 1),
+                            blurRadius: 3,
+                            spreadRadius: 1,
+                            blurStyle: BlurStyle.outer,
+                          ),
+                        ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _item[index].icon,
+                            const Spacer(),
+                            Text(
+                              _item[index].title,
+                              style: const TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Text(_item[index].subtitle),
+                            const Spacer()
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Text(
-              'Lists',
-              style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
-            ),
-          ),
-          Expanded(
-            child: GridView.count(
-                crossAxisCount: 2,
-                children: _listitem.map((item) => widget(item)).toList()),
-          )
-        ],
+        ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => NewTask(),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 20, right: 15),
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => NewTask(),
+              ),
+            );
+          },
+          child: Container(
+            height: deviceSize.width / (205 / 39),
+            width: deviceSize.width / (205 / 39),
+            alignment: Alignment.center,
+            decoration: const BoxDecoration(
+              color: Colors.blue,
+              shape: BoxShape.circle,
             ),
-          );
-          final prefs = await SharedPreferences.getInstance();
-        },
-        child: Icon(Icons.add),
+            child: const Icon(
+              Icons.add,
+              size: 40,
+              color: Colors.white,
+            ),
+          ),
+        ),
       ),
     );
   }
-}
-
-Widget widget(var item) {
-  return TextButton(
-    onPressed: () {},
-    child: Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Color.fromARGB(255, 121, 115, 115),
-              blurRadius: 2,
-            ),
-          ],
-        ),
-        child: item,
-      ),
-    ),
-  );
 }
