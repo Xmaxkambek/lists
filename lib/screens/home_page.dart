@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lists/CategoryPages/All.dart';
 import 'package:lists/models/models.dart';
 import 'package:lists/screens/new_task.dart';
 
@@ -16,8 +17,8 @@ class _HomePageState extends State<HomePage> {
           Icons.person,
           color: Colors.blueAccent,
         ),
-        title: 'salom',
-        subtitle: 'subtitle',
+        title: 'All',
+        subtitle: '11 Tasks',
         onPressed: () {}),
     Jami(
         icon: Icon(
@@ -62,7 +63,7 @@ class _HomePageState extends State<HomePage> {
   ];
   @override
   Widget build(BuildContext context) {
-    final deviceSize = MediaQuery.of(context).size;
+    final jamiSize = MediaQuery.of(context).size;
 
     return Scaffold(
       body: SafeArea(
@@ -93,11 +94,10 @@ class _HomePageState extends State<HomePage> {
                 child: GridView.builder(
                   itemCount: _item.length,
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 200,
-                    // mainAxisExtent: 86,
-                    mainAxisSpacing: 15,
-                    crossAxisSpacing: 15,
-                    childAspectRatio: 19 / 20,
+                    maxCrossAxisExtent: 150,
+                    mainAxisSpacing: 13,
+                    crossAxisSpacing: 13,
+                    childAspectRatio: 1,
                   ),
                   itemBuilder: (context, index) => InkWell(
                     onTap: () => _item[index].onPressed(context),
@@ -106,11 +106,10 @@ class _HomePageState extends State<HomePage> {
                         color: Colors.white,
                         boxShadow: [
                           BoxShadow(
-                            //rgba(0, 0, 0, 0.1);
                             color: Color.fromRGBO(0, 0, 0, 0.1),
                             offset: Offset(0.5, 1),
                             blurRadius: 3,
-                            spreadRadius: 1,
+                            spreadRadius: 2,
                             blurStyle: BlurStyle.outer,
                           ),
                         ],
@@ -143,29 +142,32 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
+      
       floatingActionButton: Padding(
+        
         padding: const EdgeInsets.only(bottom: 20, right: 15),
         child: GestureDetector(
           onTap: () {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => NewTask(),
+                builder: (context) => const NewTask(),
               ),
             );
           },
           child: Container(
-            height: deviceSize.width / (205 / 39),
-            width: deviceSize.width / (205 / 39),
+            
+            height:60,
+            width:60,
+            
             alignment: Alignment.center,
-            decoration: const BoxDecoration(
+            decoration: const  BoxDecoration(
               color: Colors.blue,
               shape: BoxShape.circle,
             ),
             child: const Icon(
               Icons.add,
-              size: 40,
+              size: 25,
               color: Colors.white,
             ),
           ),

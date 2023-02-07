@@ -1,8 +1,9 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
+import 'package:lists/CategoryPages/All.dart';
 import 'package:lists/screens/home_page.dart';
-
-final List<String> list = <String>['Work', 'Music', 'Travel', 'Study', 'Home'];
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NewTask extends StatefulWidget {
   const NewTask({super.key});
@@ -12,10 +13,18 @@ class NewTask extends StatefulWidget {
 }
 
 class _NewTaskState extends State<NewTask> {
-  final now = DateTime.now();
-  final _controller = TextEditingController();
-  final controller1 = TextEditingController();
-  DateTime? _selectedDate;
+  @override
+  void initState() {
+    SharedPreferences.getInstance().then((prefs) {
+      String? i = prefs.getString('newtask1');
+      Map e = jsonDecode(i!);
+      setState(() {
+        olingan = e['newtask1.0'];
+      });
+    });
+
+    super.initState();
+  }
 
   void _presentDatePicker() {
     showDatePicker(
@@ -36,7 +45,12 @@ class _NewTaskState extends State<NewTask> {
     print('object');
   }
 
-  String dropdownValue = list.first;
+  String dropdownValue = '';
+  DateTime? _selectedDate;
+  String olingan = '';
+  final now = DateTime.now();
+  final _controller = TextEditingController();
+  final _controller1 = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +61,7 @@ class _NewTaskState extends State<NewTask> {
             children: [
               Row(
                 children: [
-               const   Expanded(
+                  const Expanded(
                     child: Text(
                       'New task',
                       textAlign: TextAlign.center,
@@ -62,20 +76,20 @@ class _NewTaskState extends State<NewTask> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => HomePage(),
+                          builder: (context) => const HomePage(),
                         ),
                       );
                     },
-                    icon:const Icon(Icons.clear),
+                    icon: const Icon(Icons.clear),
                   ),
                 ],
               ),
             ],
           ),
-        const  SizedBox(
+          const SizedBox(
             height: 25,
           ),
-       const   Text(
+          const Text(
             'what are you planning?',
             style: TextStyle(
               fontSize: 16,
@@ -89,15 +103,15 @@ class _NewTaskState extends State<NewTask> {
               bottom: 18,
             ),
             child: TextField(
-              style: const TextStyle(fontSize: 21),
+              style: const TextStyle(fontSize: 18),
               maxLines: 6,
               controller: _controller,
             ),
           ),
           Row(
             children: [
-             const Icon(Icons.notifications),
-           const   SizedBox(
+              const Icon(Icons.notifications),
+              const SizedBox(
                 width: 10,
               ),
               Text(
@@ -105,7 +119,7 @@ class _NewTaskState extends State<NewTask> {
                       DateTime.now(),
                     ),
               ),
-            const  Spacer(),
+              const Spacer(),
               IconButton(
                 onPressed: _presentDatePicker,
                 icon: const Icon(
@@ -115,14 +129,15 @@ class _NewTaskState extends State<NewTask> {
             ],
           ),
           Row(
-            children:const  [
-              Icon(Icons.note),
-              SizedBox(
+            children: [
+              const Icon(Icons.note),
+              const SizedBox(
                 width: 10,
               ),
               Expanded(
                 child: TextField(
-                  decoration: InputDecoration(
+                  controller: _controller1,
+                  decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Add note',
                   ),
@@ -134,52 +149,55 @@ class _NewTaskState extends State<NewTask> {
             padding: const EdgeInsets.all(5.0),
             child: Row(
               children: [
-               const Icon(Icons.category),
-              const   SizedBox(
+                const Icon(Icons.category),
+                const SizedBox(
                   width: 10,
                 ),
-              const   Text('Category'),
-              const   Spacer(),
-                DropdownButton<String>(
-                  value: dropdownValue,
-                  style: const TextStyle(
-                    color: Colors.black,
+                const Text('Category'),
+                const Spacer(),
+                Expanded(
+                  child: DropdownButton(
+                    value: dropdownValue,
+                    isExpanded: true,
+                    iconSize: 35,
+                    dropdownColor: Colors.white,
+                    items: const [],
+                    onChanged: (value) {},
                   ),
-                  onChanged: (String? value) {
-                    setState(() {
-                      dropdownValue = value!;
-                    });
-                  },
-                  items: list.map((String value) {
-                    return DropdownMenuItem(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
                 ),
-             const    SizedBox(
-                  width: 10,
-                )
               ],
             ),
           ),
-        const  Spacer(),
+          const Spacer(),
           Container(
             margin: const EdgeInsets.all(8),
-            color:  Color(0xff5786FF),
+            color: const Color(0xff5786FF),
             height: 50,
             width: double.infinity,
             child: TextButton(
-              child:  const Text(
+              child: Text(
                 'Create',
-                style:  TextStyle(
-                  color:  Colors.white,
+                style: TextStyle(
+                  color: Colors.white,
                 ),
               ),
-              onPressed: (() {}),
+              onPressed: () async {
+                final prefs = await SharedPreferences.getInstance();
+                await prefs.setString(
+                    'newtask1', jsonEncode({'newtask1.0', _controller.text}));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => All(
+                      title: _controller.text,
+                      date: _selectedDate!,
+                      note: _controller1.text,
+                    ),
+                  ),
+                );
+              },
             ),
           )
-          // TextButton(onPressed: (){}, child: Text('Create'))
         ],
       ),
     );
