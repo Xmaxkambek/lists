@@ -30,16 +30,6 @@ class _WelcomeState extends State<Welcome> {
       child: Scaffold(
         body: Container(
           width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              colors: [
-                Colors.blue.shade400,
-                Colors.blue.shade600,
-                Colors.blue.shade500,
-              ],
-            ),
-          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -81,7 +71,7 @@ class _WelcomeState extends State<Welcome> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const LoginIn(),
+                        builder: (context) =>  LoginIn(),
                       ));
                 },
                 child: Container(

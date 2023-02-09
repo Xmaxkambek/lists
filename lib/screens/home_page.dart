@@ -63,8 +63,6 @@ class _HomePageState extends State<HomePage> {
   ];
   @override
   Widget build(BuildContext context) {
-    final jamiSize = MediaQuery.of(context).size;
-
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -89,7 +87,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               const SizedBox(height: 28),
-
               Expanded(
                 child: GridView.builder(
                   itemCount: _item.length,
@@ -107,10 +104,10 @@ class _HomePageState extends State<HomePage> {
                         boxShadow: [
                           BoxShadow(
                             color: Color.fromRGBO(0, 0, 0, 0.1),
-                            offset: Offset(0.5, 1),
+                            offset: Offset(0.7, 1),
                             blurRadius: 3,
                             spreadRadius: 2,
-                            blurStyle: BlurStyle.outer,
+                            blurStyle: BlurStyle.normal,
                           ),
                         ],
                       ),
@@ -142,9 +139,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      
       floatingActionButton: Padding(
-        
         padding: const EdgeInsets.only(bottom: 20, right: 15),
         child: GestureDetector(
           onTap: () {
@@ -156,12 +151,10 @@ class _HomePageState extends State<HomePage> {
             );
           },
           child: Container(
-            
-            height:60,
-            width:60,
-            
+            height: 60,
+            width: 60,
             alignment: Alignment.center,
-            decoration: const  BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.blue,
               shape: BoxShape.circle,
             ),
